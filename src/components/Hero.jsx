@@ -162,6 +162,10 @@ export default function Hero({ projects }) {
             ))}
           </div>
 
+          <p className="text-sm uppercase tracking-wide text-[var(--fg)]/50 mb-4 font-display text-center whitespace-nowrap p-4">
+            Ultimos proyectos (demos de muestra)
+          </p>
+
           <h2
             ref={wordmark2Ref}
             className="font-display font-semibold leading-[0.85] text-[var(--fg)] text-center whitespace-nowrap w-full mt-10 md:mt-16"

@@ -78,7 +78,7 @@ export default function ProjectsSection({ projects }) {
         Trabajamos con una mirada completa: estrategia, diseño y tecnología
         avanzan juntos en cada proyecto. Pasamos por distintos rubros para no
         repetir fórmulas ni caer en atajos, porque cada marca merece una
-        solución propia.
+        solución propia. Los siguientes proyectos son demostraciones diseñadas para previsualizar el resultado final.
       </p>
 
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-12 md:mt-14 border-b border-[var(--border)] pb-6">
