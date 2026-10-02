@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100">
+  <rect width="900" height="1100" fill="#E3B23C"/>
+  <rect width="900" height="1100" fill="black" opacity="0.15"/>
+  <text x="60" y="1020" font-family="Arial, sans-serif" font-size="52" fill="white" opacity="0.9">Vertice Studio</text>
+</svg>

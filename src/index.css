@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-rojo: #C23B2E;
+  --color-amarillo: #E3B23C;
+  --color-verde: #2F6B4F;
+
+  --color-ink: #15130F;
+  --color-paper: #F6F2E9;
+}
+
+:root {
+  --bg: var(--color-paper);
+  --fg: var(--color-ink);
+  --bg-soft: #ECE6D6;
+  --border: rgba(21, 19, 15, 0.14);
+  --text: var(--fg);
+  --line-strong: rgba(21, 19, 15, 0.35);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #121110;
+  --fg: #F2EEE4;
+  --bg-soft: #1B1917;
+  --border: rgba(242, 238, 228, 0.14);
+  --text: var(--fg);
+  --line-strong: rgba(242, 238, 228, 0.4);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.line-clip {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* Círculo de revelado al cambiar de tema (View Transitions API) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+@supports not (view-transition-name: root) {
+  * {
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+}
