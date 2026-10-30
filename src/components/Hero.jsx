@@ -135,31 +135,33 @@ export default function Hero({ projects }) {
         </nav>
 
         <div className="flex-1 flex flex-col px-3 md:px-6 pb-10 md:pb-14">
-          {/* Los dos últimos proyectos ocupan prácticamente toda la pantalla */}
           <div className="grid grid-cols-2 gap-2 md:gap-4 w-full h-[62vh] md:h-[72vh]">
-            {latest.map((p, i) => (
-              <a
-                key={p.id}
-                href={p.demo}
-                target="_blank"
-                rel="noreferrer"
-                ref={(el) => (cardsRef.current[i] = el)}
-                className="group relative block h-full overflow-hidden border border-[var(--border)]"
-              >
-                <img
-                  ref={(el) => (cardImgRef.current[i] = el)}
-                  src={p.image}
-                  alt={p.title}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/70 to-transparent">
-                  <p className="text-white text-sm md:text-base font-medium">
-                    {p.title}
-                  </p>
-                </div>
-              </a>
-            ))}
+            {projects.slice(-2).map((p, i, filteredArray) => {
+              const originalIndex = projects.length - filteredArray.length + i;
+              return (
+                <a
+                  key={p.id}
+                  href={p.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  ref={(el) => (cardsRef.current[originalIndex] = el)} // Guardará en [2] y [3]
+                  className="group relative block h-full overflow-hidden border border-[var(--border)]"
+                >
+                  <img
+                    ref={(el) => (cardImgRef.current[originalIndex] = el)} // Guardará en [2] y [3]
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/70 to-transparent">
+                    <p className="text-white text-sm md:text-base font-medium">
+                      {p.title}
+                    </p>
+                  </div>
+                </a>
+              );
+            })}
           </div>
 
           <p className="text-sm uppercase tracking-wide text-[var(--fg)]/50 mb-4 font-display text-center whitespace-nowrap p-4">
