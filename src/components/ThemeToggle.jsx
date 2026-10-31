@@ -1,3 +1,4 @@
+import { t } from "../i18n";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
@@ -9,7 +10,7 @@ export default function ThemeToggle({ className = "" }) {
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+      aria-label={isDark ? t.toLight : t.toDark}
       className={`group relative flex h-9 w-9 items-center justify-center rounded-full border transition-colors duration-500 ${className}`}
       style={{ borderColor: "var(--line-strong)" }}
     >

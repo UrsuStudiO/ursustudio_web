@@ -44,9 +44,9 @@ export default function ProjectsParallax({ projects }) {
   return (
     <section
       ref={sectionRef}
-      className="relative z-10 bg-[var(--bg)] px-4 md:px-10 py-20 md:py-28"
+      className="relative z-10 bg-[var(--bg-soft)] shadow-[0_0_40px_rgba(0,0,0,0.16)] px-3 md:px-6 py-20 md:py-28 min-h-[100svh] flex items-center"
     >
-      <div className="grid grid-cols-3 gap-3 md:gap-6">
+      <div className="grid grid-cols-3 gap-3 md:gap-6 w-full">
         {cols.map((col, i) => (
           <div
             key={i}
@@ -61,7 +61,8 @@ export default function ProjectsParallax({ projects }) {
               >
                 <img
                   src={p.image}
-                  alt={p.title}
+                  alt=""
+                  aria-hidden="true"
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />

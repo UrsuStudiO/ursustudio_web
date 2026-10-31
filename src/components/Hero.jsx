@@ -2,11 +2,14 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "../gsapSetup";
 import { splitToChars } from "../utils/splitChars";
 import ThemeToggle from "./ThemeToggle";
+import LangSwitch from "./LangSwitch";
+import { t } from "../i18n";
+import { useFitText } from "../hooks/useFitText";
 
 const NAV_LINKS = [
-  { label: "Proyectos", href: "#proyectos" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Contacto", href: "#contacto" },
+  { label: t.nav.projects, href: `#${t.ids.projects}` },
+  { label: t.nav.about, href: `#${t.ids.about}` },
+  { label: t.nav.contact, href: `#${t.ids.contact}` },
 ];
 
 export default function Hero({ projects }) {
@@ -21,7 +24,8 @@ export default function Hero({ projects }) {
   const heroSectionRef = useRef(null);
   const [introDone, setIntroDone] = useState(false);
 
-  const latest = projects.slice(0, 2);
+  useFitText(introWordRef);
+  useFitText(wordmark2Ref);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -92,7 +96,7 @@ export default function Hero({ projects }) {
       {/* Intro curtain */}
       <div
         ref={introRef}
-        className="fixed inset-0 z-[60] flex items-center justify-center"
+        className="fixed inset-0 z-[60] flex items-center justify-center px-3 md:px-6"
         style={{
           perspective: "1200px",
           pointerEvents: introDone ? "none" : "auto",
@@ -102,13 +106,12 @@ export default function Hero({ projects }) {
       >
         <div ref={introBgRed} className="absolute inset-0 bg-rojo" />
         <div ref={introBgSecond} className="absolute inset-0 bg-verde" />
-        <h1
+        <div
           ref={introWordRef}
-          className="relative font-display font-semibold text-white leading-none text-center px-4"
-          style={{ fontSize: "clamp(2.5rem, 12vw, 9rem)" }}
+          className="relative font-display font-semibold text-white leading-none text-center"
         >
           UrsuStudiO
-        </h1>
+        </div>
       </div>
 
       {/* Real hero content, revealed as the curtain lifts */}
@@ -131,7 +134,10 @@ export default function Hero({ projects }) {
               </a>
             ))}
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-4">
+            <LangSwitch />
+            <ThemeToggle />
+          </div>
         </nav>
 
         <div className="flex-1 flex flex-col px-3 md:px-6 pb-10 md:pb-14">
@@ -150,7 +156,7 @@ export default function Hero({ projects }) {
                   <img
                     ref={(el) => (cardImgRef.current[originalIndex] = el)} // Guardará en [2] y [3]
                     src={p.image}
-                    alt={p.title}
+                    alt={p.alt || p.title}
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
@@ -165,16 +171,15 @@ export default function Hero({ projects }) {
           </div>
 
           <p className="text-sm uppercase tracking-wide text-[var(--fg)]/50 mb-4 font-display text-center whitespace-nowrap p-4">
-            Ultimos proyectos (demos de muestra)
+            {t.latest}
           </p>
 
-          <h2
+          <h1
             ref={wordmark2Ref}
-            className="font-display font-semibold leading-[0.85] text-[var(--fg)] text-center whitespace-nowrap w-full mt-10 md:mt-16"
-            style={{ fontSize: "clamp(2.2rem, 12vw, 11rem)" }}
+            className="font-display font-semibold leading-[0.85] text-[var(--fg)] text-center whitespace-nowrap mt-6 md:mt-10"
           >
             UrsuStudiO
-          </h2>
+          </h1>
         </div>
       </div>
     </section>

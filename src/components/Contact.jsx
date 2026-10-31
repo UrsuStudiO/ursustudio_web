@@ -1,63 +1,50 @@
 import { useRef } from "react";
-import { gsap } from "../gsapSetup";
+import { t } from "../i18n";
+import { useFitText } from "../hooks/useFitText";
 
-export const CONTACTS = [
-  { label: "Correo", value: "ursustudio.contact@gmail.com", href: "mailto:ursustudio.contact@gmail.com" },
-  { label: "WhatsApp", value: "+591 625 39291", href: "https://wa.me/59162539291" },
-  { label: "LinkedIn", value: "/ursustudio", href: "https://www.linkedin.com/in/jwcn94363338a/" },
-  { label: "GitHub", value: "/ursustudio", href: "https://github.com/UrsuStudiO" },
-];
-
-function RollLink({ item }) {
-  const wrapRef = useRef(null);
-
-  const onEnter = () => {
-    gsap.to(wrapRef.current, { yPercent: -50, duration: 0.45, ease: "power3.out" });
-  };
-  const onLeave = () => {
-    gsap.to(wrapRef.current, { yPercent: 0, duration: 0.4, ease: "power3.out" });
-  };
-
-  return (
-    <a
-      href={item.href}
-      target="_blank"
-      rel="noreferrer"
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-      className="group block py-6 border-t border-[var(--border)] first:border-t-0 md:border-t-0 md:border-l md:first:border-l-0"
-    >
-      <div className="px-4 md:px-6">
-        <p className="text-xs uppercase tracking-wide text-[var(--fg)]/40 mb-3 font-display">
-          {item.label}
-        </p>
-        <div className="overflow-hidden h-[1.6em]">
-          <div ref={wrapRef}>
-            <p className="text-base md:text-lg font-medium leading-[1.6em]">{item.value}</p>
-            <p className="text-base md:text-lg font-medium leading-[1.6em] text-rojo">
-              {item.value}
-            </p>
-          </div>
-        </div>
-      </div>
-    </a>
-  );
-}
+export const EMAIL = "ursustudio.contact@gmail.com";
 
 export default function Contact() {
+  const titleRef = useRef(null);
+  useFitText(titleRef);
+
   return (
-    <section id="contacto" className="px-4 md:px-6 py-16 md:py-24 border-t border-[var(--border)]">
+    <section
+      id={t.ids.contact}
+      className="px-3 md:px-6 py-16 md:py-28 border-t border-[var(--border)]"
+    >
+      <p className="text-sm uppercase tracking-wide text-[var(--fg)]/50 mb-4 font-display text-center">
+        {t.email}
+      </p>
       <h2
-        className="font-display font-semibold px-2 md:px-0 mb-10 text-center uppercase whitespace-nowrap"
-        style={{ fontSize: "clamp(1.1rem, 5.5vw, 3.4rem)" }}
+        ref={titleRef}
+        className="font-display font-semibold leading-[0.9] text-[var(--fg)] text-center uppercase mb-10 md:mb-14"
       >
-        Hablemos de tu proyecto
+        {t.contactTitle}
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-4 border-b border-[var(--border)]">
-        {CONTACTS.map((c) => (
-          <RollLink key={c.label} item={c} />
-        ))}
-      </div>
+
+      <a
+        href={`mailto:${EMAIL}`}
+        className="group relative flex items-center justify-between gap-4 md:gap-8 overflow-hidden border-y border-[var(--line-strong)] px-4 md:px-8 py-7 md:py-12"
+      >
+        {/* Relleno que sube desde abajo al pasar el cursor */}
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 bg-rojo translate-y-full group-hover:translate-y-0 group-focus-visible:translate-y-0 transition-transform duration-500 ease-out"
+        />
+        <span
+          className="relative font-display font-semibold tracking-tight text-[var(--fg)] group-hover:text-white group-focus-visible:text-white transition-colors duration-500 break-all"
+          style={{ fontSize: "clamp(1.05rem, 4.6vw, 4.5rem)" }}
+        >
+          {EMAIL}
+        </span>
+        <span
+          aria-hidden="true"
+          className="relative shrink-0 grid place-items-center size-11 md:size-20 rounded-full border border-current text-[var(--fg)] group-hover:text-white group-focus-visible:text-white group-hover:rotate-45 transition-all duration-500 text-xl md:text-4xl"
+        >
+          ↗
+        </span>
+      </a>
     </section>
   );
 }

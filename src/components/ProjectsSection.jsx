@@ -1,21 +1,24 @@
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "../gsapSetup";
 import { splitToChars } from "../utils/splitChars";
+import { t } from "../i18n";
+import { useFitText } from "../hooks/useFitText";
 
 export default function ProjectsSection({ projects }) {
   const titleRef = useRef(null);
   const gridRef = useRef(null);
-  const [category, setCategory] = useState("Todos");
+  const [category, setCategory] = useState(t.all);
   const firstFilter = useRef(true);
+  useFitText(titleRef);
 
   const categories = useMemo(
-    () => ["Todos", ...new Set(projects.map((p) => p.category))],
+    () => [t.all, ...new Set(projects.map((p) => p.category))],
     [projects]
   );
 
   const filtered = useMemo(
     () =>
-      category === "Todos"
+      category === t.all
         ? projects
         : projects.filter((p) => p.category === category),
     [projects, category]
@@ -65,20 +68,16 @@ export default function ProjectsSection({ projects }) {
   }, [category]);
 
   return (
-    <section id="proyectos" className="px-4 md:px-10 py-16 md:py-24 border-t border-[var(--border)]">
+    <section id={t.ids.projects} className="px-3 md:px-6 py-16 md:py-24 border-t border-[var(--border)]">
       <h2
         ref={titleRef}
-        className="font-display font-semibold leading-[0.9] w-full text-[var(--fg)] text-center uppercase whitespace-nowrap mb-8 md:mb-10"
-        style={{ fontSize: "clamp(2.4rem, 10vw, 8rem)" }}
+        className="font-display font-semibold leading-[0.9] text-[var(--fg)] text-center uppercase mb-8 md:mb-10"
       >
-        Proyectos
+        {t.projectsTitle}
       </h2>
 
       <p className="w-full mt-6 md:mt-8 text-[var(--fg)]/70 leading-relaxed">
-        Trabajamos con una mirada completa: estrategia, diseño y tecnología
-        avanzan juntos en cada proyecto. Pasamos por distintos rubros para no
-        repetir fórmulas ni caer en atajos, porque cada marca merece una
-        solución propia. Los siguientes proyectos son demostraciones diseñadas para previsualizar el resultado final.
+        {t.projectsIntro}
       </p>
 
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-12 md:mt-14 border-b border-[var(--border)] pb-6">
@@ -113,8 +112,10 @@ export default function ProjectsSection({ projects }) {
             <div className="relative aspect-[4/3] overflow-hidden border border-[var(--border)]">
               <img
                 src={p.image}
-                alt={p.title}
+                alt={p.alt || p.title}
                 loading="lazy"
+                width="1920"
+                height="1080"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
             </div>
