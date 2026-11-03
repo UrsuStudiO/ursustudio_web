@@ -9,11 +9,11 @@ import About from "./components/About";
 import ProjectsSection from "./components/ProjectsSection";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import rawProjects, { localize } from "./data/projects";
+import { getProjects } from "./data/projects";
 import { LANG, t } from "./i18n";
 import { ThemeProvider } from "./context/ThemeContext";
 
-const projects = rawProjects.map((p) => localize(p, LANG));
+const projects = getProjects(LANG);
 
 // "Nosotros" queda fijo detrás del telón, así que el ancla normal (#nosotros)
 // caería en la galería. Este scroll lleva al punto donde ya se ve completo.

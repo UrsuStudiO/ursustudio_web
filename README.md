@@ -18,12 +18,11 @@ npm run preview   # previsualizar el build
 ```
 src/
   components/
-    Hero.jsx              # Intro de cortina + logo animado + preview de 2 proyectos
+    Hero.jsx              # Intro (bandera en columnas) + 2 proyectos al azar
     ProjectsParallax.jsx  # 3 columnas con parallax (izq/der suben, centro baja)
-    InnovativeText.jsx    # "DISEÑOS INNOVADORES" con efecto especial en la O
     About.jsx             # Sección "Nosotros"
     ProjectsSection.jsx   # Grilla de 2 columnas con todos los proyectos
-    Contact.jsx           # 4 contactos con animación de texto al hover
+    Contact.jsx           # correo grande con relleno al hover
     Footer.jsx            # Footer con reveal tipo cortina + nav
     ThemeToggle.jsx        # Botón de modo claro/oscuro (íconos de lucide-react)
   data/
@@ -35,9 +34,25 @@ src/
 
 ## Cómo agregar tus proyectos
 
-1. Coloca tus imágenes en `public/projects/` (recomendado: WebP, menos de 150 KB, 1920x1080).
-2. Edita `src/data/projects.js` y completa `title`, `category`, `tag`, `image`, `alt` y `demo`,
-   más la traducción en el bloque `en: { category, tag, alt }`.
+1. Pon la captura en `public/projects/<slug>.webp` (WebP, menos de 150 KB, 1920x1080).
+   El slug es el nombre en minúsculas con guiones: "Nova Run" -> `nova-run.webp`.
+2. Agrega una línea en `src/data/projects.js`:
+
+```js
+{ name: "Nova Run", category: { es: "Moda", en: "Fashion" }, url: "https://..." },
+```
+
+El hero muestra 2 proyectos al azar en cada visita y la galería parallax como mucho 9,
+así la portada no crece aunque tengas 50 webs. La grilla de "Proyectos" sí los lista todos.
+
+## Oso (cambio de tema)
+
+- Al cambiar entre modo claro y oscuro, el modo nuevo entra al frente con la forma del
+  oso desde el centro de la pantalla (ver `ThemeContext.jsx` e `index.css`).
+  Es el único lugar donde se usa el oso.
+- `public/bear-face.png`: oso con los calados de ojos, nariz y boca (se ve la página a través).
+- `public/bear-mask.png`: silueta rellena que tapa esos huecos al final de la animación.
+- `public/logo.png` es el original en alta resolución (no se usa en la página).
 
 ## Paleta de colores
 

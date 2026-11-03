@@ -14,7 +14,8 @@ export default function ProjectsParallax({ projects }) {
   // 2. Desordena los proyectos de forma segura y constante por renderizado
   const randomizedProjects = useMemo(() => {
     if (!projects) return [];
-    return [...projects].sort(() => Math.random() - 0.5);
+    // Como mucho 9 imágenes: la galería es decorativa y no debe crecer con el catálogo
+    return [...projects].sort(() => Math.random() - 0.5).slice(0, 9);
   }, [projects]); // Solo cambia si la lista original de proyectos cambia
 
   useLayoutEffect(() => {

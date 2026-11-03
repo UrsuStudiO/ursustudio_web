@@ -121,7 +121,7 @@ export default function ProjectsSection({ projects }) {
             </div>
             <div className="flex items-baseline justify-between mt-3">
               <h3 className="font-display font-medium text-lg">{p.title}</h3>
-              <span className="text-xs text-[var(--fg)]/50">{p.tag}</span>
+              <span className="text-xs text-[var(--fg)]/50">{p.category}</span>
             </div>
           </a>
         ))}

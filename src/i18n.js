@@ -7,7 +7,7 @@ const dict = {
     ids: { projects: "proyectos", about: "nosotros", contact: "contacto" },
     nav: { projects: "Proyectos", about: "Nosotros", contact: "Contacto" },
     all: "Todos",
-    latest: "Últimos proyectos (demos de muestra)",
+    latest: "Proyectos destacados (demos de muestra)",
     aboutTitle: "Nosotros",
     aboutKicker: "Bienvenidos al estudio",
     aboutText:
@@ -31,7 +31,7 @@ const dict = {
     ids: { projects: "projects", about: "about", contact: "contact" },
     nav: { projects: "Projects", about: "About", contact: "Contact" },
     all: "All",
-    latest: "Latest projects (sample demos)",
+    latest: "Featured projects (sample demos)",
     aboutTitle: "About us",
     aboutKicker: "Welcome to the studio",
     aboutText:

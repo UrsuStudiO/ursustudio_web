@@ -71,7 +71,9 @@ body {
   vertical-align: top;
 }
 
-/* Círculo de revelado al cambiar de tema (View Transitions API) */
+/* Cambio de tema (View Transitions): la página nueva entra dentro del oso.
+   Dos capas de máscara: el oso con la cara calada y la silueta rellena.
+   Tamaños y posición los anima ThemeContext. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -84,10 +86,50 @@ body {
 
 ::view-transition-new(root) {
   z-index: 2;
+  -webkit-mask-image: url("/bear-face.png"), url("/bear-mask.png");
+  mask-image: url("/bear-face.png"), url("/bear-mask.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 0 0, 0 0;
+  mask-size: 0 0, 0 0;
 }
 
-@supports not (view-transition-name: root) {
-  * {
-    transition: background-color 0.4s ease, color 0.4s ease;
-  }
+/* Respaldo sin View Transitions: capas fijas con el fondo del tema nuevo recortado con el oso.
+   Tamaño y posición los anima ThemeContext. Van por encima de todo. */
+.bear-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  will-change: mask-size, mask-position;
+}
+
+/* Con los calados de la cara (ojos, nariz, boca) */
+.bear-transition--face {
+  -webkit-mask-image: url("/bear-face.png");
+  mask-image: url("/bear-face.png");
+}
+
+/* Silueta rellena: cierra los huecos antes de cubrir la pantalla */
+.bear-transition--solid {
+  -webkit-mask-image: url("/bear-mask.png");
+  mask-image: url("/bear-mask.png");
+  opacity: 0;
+}
+
+.bear-transition[data-to="light"] {
+  background: var(--color-paper);
+}
+
+.bear-transition[data-to="dark"] {
+  background: #121110;
+}
+
+/* Mientras la capa tapa la pantalla el tema cambia de golpe (sin fundidos),
+   así al destaparla todo ya tiene sus colores finales */
+.theme-swap,
+.theme-swap * {
+  transition: none !important;
 }
