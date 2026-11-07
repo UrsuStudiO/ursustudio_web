@@ -17,3 +17,16 @@ export function splitToChars(el) {
   });
   return chars;
 }
+
+// Pinta de dorado las mayúsculas (U, S, O de "UrsuStudiO": el monograma USO)
+// y devuelve sus índices.
+export function markMonogram(chars, className = "gold-auto") {
+  const idx = [];
+  chars.forEach((c, i) => {
+    if (/\p{Lu}/u.test(c.textContent)) {
+      c.classList.add(className);
+      idx.push(i);
+    }
+  });
+  return idx;
+}

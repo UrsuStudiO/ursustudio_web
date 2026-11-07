@@ -106,7 +106,7 @@ Usa [Lenis](https://lenis.darkroom.engineering/) (`npm i lenis`), iniciado en `s
 - Metadatos, Open Graph y datos estructurados están en `index.html` y `en/index.html`.
 - `public/sitemap.xml` y `public/robots.txt` son archivos estáticos.
 - Imagen para compartir en redes: `public/og-image.jpg` (1200x630).
-- **Cuando tengas dominio propio** cambia la URL en 4 archivos: `index.html`, `en/index.html`,
+- **Cuando tengas dominio propio** cambia la URL (hoy `https://ursustudio-web.pages.dev`) en 4 archivos: `index.html`, `en/index.html`,
   `public/sitemap.xml` y `public/robots.txt`.
 - Pasos en Google Search Console: agregar propiedad, verificar, enviar `sitemap.xml`
   y pedir indexación de `/` y `/en/`.

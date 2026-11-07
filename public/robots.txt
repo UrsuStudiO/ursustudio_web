@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ursustudio.vercel.app/sitemap.xml
+Sitemap: https://ursustudio-web.pages.dev/sitemap.xml

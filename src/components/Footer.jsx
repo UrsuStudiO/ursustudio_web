@@ -1,6 +1,8 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "../gsapSetup";
 import { EMAIL } from "./Contact";
+import Wordmark from "./Wordmark";
+import { useQuote } from "../context/QuoteContext";
 import { useFitText } from "../hooks/useFitText";
 import { t } from "../i18n";
 
@@ -14,6 +16,7 @@ export default function Footer() {
   const sectionRef = useRef(null);
   const panelRef = useRef(null);
   const wordRef = useRef(null);
+  const { openQuote } = useQuote();
   useFitText(wordRef);
 
   useLayoutEffect(() => {
@@ -47,12 +50,13 @@ export default function Footer() {
         </nav>
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 py-8">
-          <a
-            href={`mailto:${EMAIL}`}
-            className="text-sm md:text-base opacity-80 hover:opacity-100 transition-opacity"
+          <button
+            type="button"
+            onClick={() => openQuote()}
+            className="text-left text-sm md:text-base opacity-80 hover:opacity-100 transition-opacity cursor-pointer"
           >
             {EMAIL}
-          </a>
+          </button>
           <p className="text-xs opacity-50">
             © {new Date().getFullYear()} - {t.rights}
           </p>
@@ -62,7 +66,7 @@ export default function Footer() {
           ref={wordRef}
           className="font-display font-semibold leading-[0.8] text-center"
         >
-          UrsuStudiO
+          <Wordmark tone="bright" />
         </p>
       </div>
     </footer>

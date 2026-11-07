@@ -10,27 +10,34 @@
   --color-amarillo: #E3B23C;
   --color-verde: #2F6B4F;
 
-  --color-ink: #15130F;
-  --color-paper: #F6F2E9;
+  /* Paleta de marca: negro, blanco y dorado */
+  --color-ink: #111111;
+  --color-paper: #FFFFFF;
+
+  /* Dorado de marca */
+  --color-oro: #D4AF37;
 }
 
 :root {
   --bg: var(--color-paper);
   --fg: var(--color-ink);
-  --bg-soft: #ECE6D6;
-  --border: rgba(21, 19, 15, 0.14);
+  --bg-soft: #F4F4F4;
+  --border: rgba(17, 17, 17, 0.14);
   --text: var(--fg);
-  --line-strong: rgba(21, 19, 15, 0.35);
+  --line-strong: rgba(17, 17, 17, 0.35);
+  /* Dorado para detalles; más oscuro en modo claro para que se lea sobre blanco */
+  --accent: #A8841F;
   color-scheme: light;
 }
 
 [data-theme="dark"] {
-  --bg: #121110;
-  --fg: #F2EEE4;
-  --bg-soft: #1B1917;
-  --border: rgba(242, 238, 228, 0.14);
+  --bg: var(--color-ink);
+  --fg: var(--color-paper);
+  --bg-soft: #1A1A1A;
+  --border: rgba(255, 255, 255, 0.14);
   --text: var(--fg);
-  --line-strong: rgba(242, 238, 228, 0.4);
+  --line-strong: rgba(255, 255, 255, 0.4);
+  --accent: var(--color-oro);
   color-scheme: dark;
 }
 
@@ -69,6 +76,25 @@ body {
   overflow: hidden;
   display: inline-block;
   vertical-align: top;
+}
+
+/* Dorado metálico de marca (#D4AF37). ".gold" es el brillante, para fondos
+   oscuros; ".gold-auto" se oscurece en modo claro para que se lea sobre crema. */
+.gold,
+.gold-auto {
+  background-image: linear-gradient(180deg, #f7e08e 0%, #d4af37 50%, #a8841f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+[data-theme="light"] .gold-auto {
+  background-image: linear-gradient(180deg, #c9a23a 0%, #a8841f 55%, #7c5f12 100%);
+}
+
+/* Sombra suave para que el dorado se lea sobre los colores de la intro */
+.gold-shadow {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
 }
 
 /* Cambio de tema (View Transitions): la página nueva entra dentro del oso.
@@ -124,7 +150,7 @@ body {
 }
 
 .bear-transition[data-to="dark"] {
-  background: #121110;
+  background: var(--color-ink);
 }
 
 /* Mientras la capa tapa la pantalla el tema cambia de golpe (sin fundidos),

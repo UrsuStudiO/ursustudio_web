@@ -7,11 +7,14 @@ import Pin from "./components/Pin";
 import ProjectsParallax from "./components/ProjectsParallax";
 import About from "./components/About";
 import ProjectsSection from "./components/ProjectsSection";
+import Plans from "./components/Plans";
+import Faq from "./components/Faq";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { getProjects } from "./data/projects";
 import { LANG, t } from "./i18n";
 import { ThemeProvider } from "./context/ThemeContext";
+import { QuoteProvider } from "./context/QuoteContext";
 
 const projects = getProjects(LANG);
 
@@ -85,6 +88,8 @@ function Page() {
       </div>
 
       <ProjectsSection projects={projects} />
+      <Plans />
+      <Faq />
       <Contact />
       <Footer />
     </main>
@@ -94,7 +99,9 @@ function Page() {
 export default function App() {
   return (
     <ThemeProvider>
-      <Page />
+      <QuoteProvider>
+        <Page />
+      </QuoteProvider>
     </ThemeProvider>
   );
 }
